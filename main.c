@@ -1,7 +1,6 @@
 
 #include "so_long.h"
 //===================================================================================
-// TO DO LATER:
 // If any misconfiguration of any kind is encountered in the file, 
 // the program must exit in a clean way, 
 // and return "Error\n" followed by an explicit error message of your choice.

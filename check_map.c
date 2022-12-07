@@ -16,19 +16,48 @@
 // map should contain valid path (C and E should be reachable for P)
 //===============================================
 
-void	simple_map_check(t_data *data)
+// void	check_upper_wall(t_data *data)
+// {
+// 		int	i;
+// 	i = 0;
+// 	while (data->map[0][i])
+// 	{
+// 		if (data->map[0][i++] != '1')
+// 		{
+// 			free_struct(data);
+// 			error_msg("Upper map row should contain '1' only\n");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 	}
+// }
+void 	check_walls(t_data *data)
 {
-	if (!data->map[0]) // !data->map is invalid - pointer EXISTS, but we're looking for starting char
+	int	i;
+
+	i = 0;
+	while (data->map[0][i])
 	{
-		free(data);
-		error_msg("File is empty\n");
-		exit(EXIT_FAILURE);
+		if (data->map[0][i++] != '1')
+		{
+			free_struct(data);
+			error_msg("Upper map row should contain '1' only\n");
+			exit(EXIT_FAILURE);
+		}
 	}
-	
+	// i = 0; //SEGFAULTTTTTTTTT
+	// while (data->map[data->row][i]) // accessing -1 index
+	// {
+	// 	if (data->map[data->row][i++] != '1')
+	// 	{
+	// 		free_struct(data);
+	// 		error_msg("Lower map row should contain '1' only");
+	// 		exit(EXIT_FAILURE);
+	// 	}
+	// }
+
 }
 
 void	check_map(t_data *data)
 {
-	simple_map_check(data);
-
+	check_walls(data);
 }	
