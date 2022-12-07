@@ -6,14 +6,14 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2022/12/07 12:29:48 by dgoremyk         ###   ########.fr        #
+#    Updated: 2022/12/07 13:19:18 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # run make inside mlx folder!
 
 NAME = so_long
-CC = gcc
+CC = gcc -g
 #CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
 SRC = main.c
