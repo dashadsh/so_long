@@ -6,11 +6,11 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 22:02:23 by dgoremyk          #+#    #+#             */
-/*   Updated: 2022/12/06 19:11:27 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:41:19 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 /* A FUNCTION TO READ FROM THE FILE DESCRIPTOR
 
 1. using 'read' function (<unistd.h>) - it loads the contents of a file into 

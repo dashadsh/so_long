@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 17:22:41 by dgoremyk          #+#    #+#             */
-/*   Updated: 2022/12/06 19:27:07 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:48:14 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <stdio.h> 
 /* library for open*/
 # include <fcntl.h>
+/* library for ft_printf*/
+# include <stdarg.h>
 
 //==================LIBFT=FUNC=======================//
 int				ft_isalpha(int c);
@@ -95,4 +97,18 @@ char	*cleaner(char *hold);
 char	*garbage_collector(char *hold);
 char	*get_next_line(int fd);
 //==================GNL=FUNC=END====================//
+
+//===============FT_PRINTF=FUNC====================//
+int		ft_write_char(char c);
+int		ft_write_str(char *str);
+int		ft_write_nbr(int n);
+int		ft_write_unsigned_int(unsigned int n);
+int		ft_write_ptr(unsigned long int n);
+int		ft_write_hex(unsigned int n);
+int		ft_write_hex_upper(unsigned int n);
+
+int		format(va_list *ap, char c);
+
+int		ft_printf(const char *s, ...);
+//===============FT_PRINTF=FUNC=END===================//
 #endif

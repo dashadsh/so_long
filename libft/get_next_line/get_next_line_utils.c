@@ -6,11 +6,11 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 22:02:05 by dgoremyk          #+#    #+#             */
-/*   Updated: 2022/12/06 19:08:22 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:41:13 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 size_t	gnl_strlen(const char *s)
 {

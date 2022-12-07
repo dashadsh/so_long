@@ -6,7 +6,7 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/17 17:22:34 by dgoremyk          #+#    #+#              #
-#    Updated: 2022/12/06 18:55:26 by dgoremyk         ###   ########.fr        #
+#    Updated: 2022/12/06 23:57:19 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 RM = rm -f
 
@@ -29,7 +29,12 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
 			ft_strmapi.c ft_striteri.c ft_strtrim.c ft_itoa.c \
 			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-			get_next_line.c get_next_line_utils.c
+			get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+			ft_printf/ft_printf.c ft_printf/ft_write_char.c \
+			ft_printf/ft_write_str.c ft_printf/ft_write_nbr.c \
+			ft_printf/ft_write_unsigned_int.c \
+			ft_printf/ft_write_ptr.c ft_printf/ft_write_hex.c \
+			ft_printf/ft_write_hex_upper.c
 
 BONUS_SRCS = ft_lstnew.c \
 			ft_lstadd_front.c \
@@ -54,11 +59,12 @@ BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 # 3. ar rcs $(NAME) $(OBJS) is a recipe (an action that make carries out).
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJS)
+	ar rcs $(NAME) $(BONUS_OBJS)
 	ar rcs $(NAME) $(OBJS)
 	
-bonus: $(BONUS_OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS)
+# bonus: $(BONUS_OBJS)
+# 	ar rcs $(NAME) $(BONUS_OBJS)
 	
 # Define a pattern rule that compiles every .c file into a .o file
 # https://www.gnu.org/software/make/manual/make.html#Pattern-Match
@@ -78,4 +84,4 @@ re: fclean all
 # There are two reasons to use a phony target: 
 # to avoid a conflict with a file of the same name, and to improve performance.
 # https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

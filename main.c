@@ -3,7 +3,8 @@
 
 typedef struct s_data
 {
-	int	infile;
+	char	**field;
+
 } 				t_data;
 
 void	dot_ber_check(char **av)
@@ -34,19 +35,28 @@ void early_error_check(int ac, char **av)
 	dot_ber_check(av);
 }
 
-void	empty_init(t_data *data)
-{
-	data->infile = -1;
-}
+// void	empty_init(t_data *data)
+// {
+	
+// }
 
 void	open_file(t_data *data, char **av) //./so_long ./maps/1.ber
 {
-	data->infile = open(av[1], O_RDONLY);
-	if (data->infile == -1)
+	char	*line;
+	int		fd;
+	int		row = 0;
+
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
 	{
 		perror(""); //free struct
 		exit(EXIT_FAILURE);
 	}
+	line = get_next_line(fd);
+	// field[row] = ft_strtrim(line, '\n');
+
+
+
 }
 
 int main(int ac, char **av)
@@ -57,5 +67,5 @@ int main(int ac, char **av)
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		exit(EXIT_FAILURE);
-	open_file(data, av);	
+	open_file(data, av);
 }

@@ -6,7 +6,7 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2022/12/06 19:35:47 by dgoremyk         ###   ########.fr        #
+#    Updated: 2022/12/07 12:29:48 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,20 +28,22 @@ LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-# -C option is for running MAKE command on a subfolder
-# add later one more make for libft
-# -L ??? SEARCHES FOR LIBRARY ITSELF
-# -l load
 $(NAME): $(OBJ)
 	$(MAKE) -C libft
 	$(MAKE) -C mlx
-	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -o $(NAME)
-#	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 # $(CC) $(OBJ) $(CFLAGS) $(MLXLIB) -framework OpenGL -framework AppKit -o $(NAME)
+
+#	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -o $(NAME)
+
 clean:
+	$(MAKE) clean -C mlx
+	$(MAKE) clean -C libft
 	$(RM) $(OBJ)
 
 fclean: clean
+	$(MAKE) clean -C mlx
+	$(MAKE) fclean -C libft
 	$(RM) $(NAME)
 
 re:	fclean all
