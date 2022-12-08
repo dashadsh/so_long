@@ -7,10 +7,10 @@
 // map >= 3 rows ???
 // map >= 3 columns ???
 //============ASSIGNMENT============================
-// map has walls, collectible, free space
+// map has walls, collectible, free space - GAME CAN START W/O FREE SPACE (COVERED WITH COLLECTIBLE)
 // map contains only 01CEP - DONE
-// map contains 1 exit, 1 player
-// map has >=1 collectible
+// map contains 1 exit, 1 player - DONE
+// map has >=1 collectible - DONE
 // map is rectangular  - DONE WHEN READ
 // map is surrounded by walls - DONE
 // map should contain valid path (C and E should be reachable for P)
