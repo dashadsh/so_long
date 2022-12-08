@@ -41,7 +41,7 @@ void	count_rows(t_data *data, char **av)
 	fd = open_file(data, av);
 	line = get_next_line(fd);
 	if (line)
-		data->row_length = ft_strlen(line) - 1; // will work with non empty file only
+		data->columns = ft_strlen(line) - 1; // will work with non empty file only
  	else
 	{
 		free(data);
@@ -52,7 +52,7 @@ void	count_rows(t_data *data, char **av)
 	{
 		free(line); //why it should be freed here if i can free on the end??
 		line = get_next_line(fd);
-		data->row++;
+		data->rows++;
 	}
 	free(line); // - can freeing in a loop be really enough??
 	close(fd);
@@ -60,7 +60,7 @@ void	count_rows(t_data *data, char **av)
 
 void 	allocate_map_memory(t_data *data)
 {
-	data->map = ft_calloc(data->row + 1, sizeof(char *)); // alloc memory for 2d array - array or char pointers
+	data->map = ft_calloc(data->rows + 1, sizeof(char *)); // alloc memory for 2d array - array or char pointers
 	if (!data->map)
 	{
 		free_struct(data);
@@ -80,7 +80,7 @@ void	read_map(t_data *data, char **av) // ./so_long ./maps/1.ber
 	count_rows(data, av);
 	allocate_map_memory(data);
 	line = get_next_line(fd);
-	data->row_length = ft_strlen(line) - 1;	// same as below
+	data->columns = ft_strlen(line) - 1;	// same as below
 	// data->row_length = ft_strlen(ft_strtrim(line, "\n"));	
 	while (line)
 	{
@@ -94,7 +94,7 @@ void	read_map(t_data *data, char **av) // ./so_long ./maps/1.ber
 	// printf("row length: %d\n", data->row_length);
 	while (i--) // doublecheck please!
 	{
-		if (data->row_length != ft_strlen(data->map[i]))
+		if (data->columns != ft_strlen(data->map[i]))
 		{
 			free_struct(data);
 			error_msg("Map should be rectangular\n");

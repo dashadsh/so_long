@@ -15,12 +15,16 @@
 
 # include <stdbool.h>
 
-
 typedef struct s_data
 {
 	char	**map;
-	int		row;
-	int		row_length;
+	int		rows;
+	int		columns;
+	int		player;
+	int		collectible;
+	int		exit;
+	int		player_row_pos;
+	int		player_col_pos;
 } 				t_data;
 
 /* error.c */
@@ -33,8 +37,13 @@ void	count_rows(t_data *data, char **av);
 void 	allocate_map_memory(t_data *data);
 void	read_map(t_data *data, char **av);
 
+/* check_path.c */
+
 /* check_map.c */
+void	check_0_1_p_c_e(t_data *data);
 void 	check_walls(t_data *data);
+void	count_p_c_e(t_data *data);
+void	check_p_c_e(t_data *data);
 void	check_map(t_data *data);
 
 /* main.c */

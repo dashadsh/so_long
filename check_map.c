@@ -2,62 +2,129 @@
 
 #include "so_long.h"
 
-//================================================ will be covered anyway later - easier to prevent
-// map exists
-// map >= 3 rows
-// map >= 3 columns
-//===============================================
+//=============MINE============================== 
+// map exists - DONE WHEN READ
+// map >= 3 rows ???
+// map >= 3 columns ???
+//============ASSIGNMENT============================
 // map has walls, collectible, free space
-// map contains only 01CEP
+// map contains only 01CEP - DONE
 // map contains 1 exit, 1 player
-// map has >=1 collctible
-// map is rectangular  
-// map is surrounded by walls
+// map has >=1 collectible
+// map is rectangular  - DONE WHEN READ
+// map is surrounded by walls - DONE
 // map should contain valid path (C and E should be reachable for P)
 //===============================================
 
-// void	check_upper_wall(t_data *data)
-// {
-// 		int	i;
-// 	i = 0;
-// 	while (data->map[0][i])
-// 	{
-// 		if (data->map[0][i++] != '1')
-// 		{
-// 			free_struct(data);
-// 			error_msg("Upper map row should contain '1' only\n");
-// 			exit(EXIT_FAILURE);
-// 		}
-// 	}
-// }
-void 	check_walls(t_data *data)
+void	check_0_1_p_c_e(t_data *data)
 {
-	int	i;
+	int	row;
+	int	column;
 
-	i = 0;
-	while (data->map[0][i])
+	row = -1;
+	while(data->map[++row])
 	{
-		if (data->map[0][i++] != '1')
+		column = -1;
+		while(data->map[row][++column])
 		{
-			free_struct(data);
-			error_msg("Upper map row should contain '1' only\n");
-			exit(EXIT_FAILURE);
+			if (!ft_strchr("01PCE", data->map[row][column]))
+			{
+				// printf("row: %d	column: %d\n", row, column);
+				free_struct(data);
+				error_msg("Map should contain 01PCE chars only\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+	//	printf("inner loop end. column outside the range\nrow: %d	column: %d\n", row, column);
+	}
+//	printf("outer loop end. row/column outside the range\nrow: %d	column: %d\n", row, column);
+}
+
+void	check_walls(t_data *data)
+{
+	int	column;
+	int	row;
+
+	column = -1;
+	row = -1;
+	// printf("col length/amt of rows: %d\n", data->rows);
+	// printf("highest row index: %d\n", data->rows-1);
+	// printf("row length/amt of columns: %d\n", data->columns);
+	// printf("highest column index: %d\n", data->columns-1);
+	while(data->map[0][++column])
+	{
+		if ((data->map[0][column] != '1')
+			|| (data->map[data->rows-1][column] != '1'))
+			{
+				free_struct(data);
+				error_msg("Horizontal wall should contain 1's only\n");
+				exit(EXIT_FAILURE);
+			}
+	}
+	// printf("loop for horizontal walls ended\ncolumn outside of range: %d\n\n", column);
+	while(data->map[++row])
+		if ((data->map[row][0] != '1')
+			|| (data->map[row][data->columns-1] != '1'))
+			{
+				free_struct(data);
+				error_msg("Vertical wall should contain 1's only\n");
+				exit(EXIT_FAILURE);
+			}
+	// printf("loop for vertical walls ended\nrow outside of range: %d\n\n", row);
+}
+
+void	count_p_c_e(t_data *data)
+{
+	int	row;
+	int	column;
+
+	row = -1;
+	while(data->map[++row])
+	{
+		column = -1;
+		while(data->map[row][++column])
+		{
+			if (data->map[row][column] == 'P')
+			{
+				data->player++;
+				// printf("P: %i\n", data->player); //printed an address at some point! WHY??
+				data->player_row_pos = row;
+				data->player_col_pos = column;
+			}
+			else if (data->map[row][column] == 'C')
+			{
+				data->collectible++;
+				// printf("C: %i\n", data->collectible);
+			}
+			else if (data->map[row][column] == 'E')
+			{
+				data->exit++;
+				// printf("E: %i\n", data->exit);
+			}
 		}
 	}
-	// i = 0; //SEGFAULTTTTTTTTT
-	// while (data->map[data->row][i]) // accessing -1 index
-	// {
-	// 	if (data->map[data->row][i++] != '1')
-	// 	{
-	// 		free_struct(data);
-	// 		error_msg("Lower map row should contain '1' only");
-	// 		exit(EXIT_FAILURE);
-	// 	}
-	// }
+}
 
+void	check_p_c_e(t_data *data)
+{
+	count_p_c_e(data);
+	if (data->player != 1 || data->exit != 1)
+	{
+		free_struct(data);
+		error_msg("Map should contain 1 player and 1 exit\n");
+		exit(EXIT_FAILURE);
+	}
+	if (data->collectible < 1)
+	{
+		free_struct(data);
+		error_msg("Map should contain at least one collectible\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	check_map(t_data *data)
 {
+	check_0_1_p_c_e(data);
 	check_walls(data);
+	check_p_c_e(data);
 }	

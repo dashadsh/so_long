@@ -6,7 +6,7 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2022/12/07 17:28:06 by dgoremyk         ###   ########.fr        #
+#    Updated: 2022/12/08 17:17:17 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -g
 #CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
-SRC = main.c read_map.c check_map.c error.c
+SRC = main.c read_map.c check_path.c check_map.c error.c
 OBJ = $(SRC:.c=.o)
 # APPLEFLAGS = -framework OpenGL -framework AppKit
 MLXLIB = ./mlx/libmlx.a
