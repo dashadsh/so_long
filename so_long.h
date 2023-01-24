@@ -65,24 +65,26 @@ void	count_rows(t_data *data, char **av);
 void 	allocate_map_memory(t_data *data);
 void	read_map(t_data *data, char **av);
 
-/* check_map.c */
+/* check_map1.c */
 void	check_0_1_p_c_e(t_data *data);
 void 	check_walls(t_data *data);
-void	count_p_c_e(t_data *data);
+// void	count_p_c_e(t_data *data);
 void	check_p_c_e(t_data *data);
-void	check_map(t_data *data);
 
-/* check_path.c */
+/* check_map2.c */
 void	allocate_duplicate_memory(t_data *data);
 void	go_through_map(t_data *data, int y, int x);
 void	check_access(t_data *data);
-void	check_valid_path(t_data *data);
+void	check_path(t_data *data);
+void	check_map(t_data *data);
+
+/* early_error_check */
+void	dot_ber_check(char **av);
+void 	early_error_check(int ac, char **av);
 
 /* main.c */
 void	ft_clear(char **str);
 void	free_struct(t_data *data);
-void	dot_ber_check(char **av);
-void 	early_error_check(int ac, char **av);
 int 	main(int ac, char **av);
 
 /* graphics.c */

@@ -71,7 +71,7 @@ void	check_access(t_data *data)
 		}
 }
 
-void	check_valid_path(t_data *data)
+void	check_path(t_data *data)
 {
 	allocate_duplicate_memory(data);
 	go_through_map(data, data->row_pos, data->col_pos);
@@ -88,3 +88,11 @@ void	check_valid_path(t_data *data)
 	// }
 	check_access(data);
 }
+
+void	check_map(t_data *data)
+{
+	check_0_1_p_c_e(data);
+	check_walls(data);
+	check_p_c_e(data);
+	check_path(data);
+}	

@@ -121,10 +121,3 @@ void	check_p_c_e(t_data *data)
 		exit(EXIT_FAILURE);
 	}
 }
-
-void	check_map(t_data *data)
-{
-	check_0_1_p_c_e(data);
-	check_walls(data);
-	check_p_c_e(data);
-}	

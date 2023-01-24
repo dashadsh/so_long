@@ -6,6 +6,9 @@
 // the program must exit in a clean way, 
 // and return "Error\n" followed by an explicit error message of your choice.
 //===================================================================================
+/*
+free 2d array of chars
+*/
 void	ft_clear(char **str)
 {
 	int	i;
@@ -20,6 +23,9 @@ void	ft_clear(char **str)
 	str = NULL;
 }
 
+/*
+free 2d array of ints
+*/
 void	ft_clear2(int **str)
 {
 	int	i;
@@ -42,30 +48,6 @@ void	free_struct(t_data *data)
 		ft_clear2(data->duplicate);
 }
 
-void	dot_ber_check(char **av)
-{
-	int	i;
-
-	i = ft_strlen(av[1]) - 1;
-	if (av[1][i - 3] == '.' && av[1][i - 2] == 'b' \
-		&& av[1][i - 1] == 'e' && av[1][i] == 'r')
-		return ;
-	else
-	{
-		error_msg("Incorrect map format, should be .ber\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	early_error_check(int ac, char **av) //no malloc's yet
-{
-	if (ac != 2)
-	{
-		error_msg("Wrong amount of arguments, try: ./so_long map.ber\n");
-		exit(EXIT_FAILURE);
-	}
-	dot_ber_check(av);
-}
 
 int main(int ac, char **av)
 {
@@ -80,7 +62,6 @@ int main(int ac, char **av)
 	}
 	read_map(data, av); //read_map, check_map
 	check_map(data);
-	check_valid_path(data);
 	// free_struct(data);
 	// run_window();
 	launch_graphics(data);
