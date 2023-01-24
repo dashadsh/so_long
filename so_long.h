@@ -21,30 +21,29 @@
 # define PLAYER "./img/player.xpm"
 # define COLLECTIBLE "./img/collectible.xpm"
 # define EXIT "./img/exit.xpm"
-// # define UP 13
-// # define DOWN 1
-// # define RIGHT 2
-// # define LEFT 0
-// # define ESC 53
+// # define KEY_W 13
+// # define KEY_A 0
+// # define KEY_S 1
+// # define KEY_D 2
+// # define KEY_ESC 53
 
 typedef struct s_data
 {
 	char	**map;
+	int		**duplicate;
 
 	int		rows;
 	int		columns;
+
 	int		player;
 	int		collectible;
-	// int 	score; // NEEDED? 0 by default
 	int		exit;
+
 	int		row_pos; // P position
 	int		col_pos; // P position
-	int		**duplicate;
-
 
 	void	*mlx_ptr;
 	void	*win_ptr;
-	// void	*img_ptr;
 
 	// mlx_xpm_to_image returns a non-null pointer as an image identifier
 	// sets the img_wh (width/hight) accordingly
@@ -53,7 +52,11 @@ typedef struct s_data
 	void	*player_img;
 	void	*collectible_img;
 	void	*exit_img;
-	int		img_wh;
+	// int		img_wh;
+
+	int		steps;
+	// int		collected;
+
 } 				t_data;
 
 /* error.c */
@@ -95,7 +98,11 @@ int 	main(int ac, char **av);
 
 /* graphics.c */
 void	set_img_ptr(t_data *data);
+void	put_img(t_data *data, void *img, int row, int col);
 void	put_img_to_map(t_data *data);
 void	launch_graphics(t_data *data);
+
+/* moves.c */
+void	display_steps(t_data *data);
 
 # endif

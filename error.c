@@ -8,7 +8,6 @@ void error_msg(char *msg)
 	write(2, msg, ft_strlen(msg));
 }
 
-
 void error_msg_exit(char *msg)
 {
 	write(2, "Error\n", 6);

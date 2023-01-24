@@ -48,5 +48,5 @@ int main(int ac, char **av)
 	read_map(data, av); //read_map, check_map
 	check_map(data);
 	launch_graphics(data);
-
+	return (0);
 }

@@ -54,10 +54,53 @@ the window to use, and the image
 The (x , y) coordinates define where the image should be placed in the window.
 */
 
-// void	put_img(t_data *data, void *img, int row, int col)
+void	put_img(t_data *data, void *img, int row, int col)
+{
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, SIZE * col, \
+			SIZE * row);
+}
+
+void	put_img_to_map(t_data *data)
+{
+	int	row;
+	int	col;
+
+	row = -1;
+	while (++row < data->rows)
+	{
+		col = -1;
+		while (++col < data->columns)
+		{
+			if (data->map[row][col] == '1')
+				put_img(data, data->wall_img, row, col);
+			else if (data->map[row][col] == '0')
+				put_img(data, data->floor_img, row, col);
+			else if (data->map[row][col] == 'C')
+				put_img(data, data->collectible_img, row, col);
+			else if (data->map[row][col] == 'P')
+				put_img(data, data->player_img, row, col);
+			else if (data->map[row][col] == 'E')
+				put_img(data, data->exit_img, row, col);
+		}
+	}
+}
+
+// void	*put_img(t_data *data, int i, int j)
 // {
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, SIZE * col, \
-// 			SIZE * row);
+// 	void	*img;
+
+// 	img = NULL;
+// 	if (data->map[i][j] == '1')
+// 		img = data->wall_img;
+// 	else if (mlx_s->map[i][j] == '0')
+// 		img = data->floor_img;
+// 	else if (mlx_s->map[i][j] == 'C')
+// 		img = data->collectible_img;
+// 	else if (mlx_s->map[i][j] == 'P')
+// 		img = data->player_img;
+// 	else if (mlx_s->map[i][j] == 'E')
+// 		img = data->exit_img;
+// 	return (img);
 // }
 
 // void	put_img_to_map(t_data *data)
@@ -72,43 +115,18 @@ The (x , y) coordinates define where the image should be placed in the window.
 // 		while (++col < data->columns)
 // 		{
 // 			if (data->map[row][col] == '1')
-// 				put_img(data, data->wall_img, row, col);
+// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->wall_img, SIZE * col, SIZE * row);
 // 			else if (data->map[row][col] == '0')
-// 				put_img(data, data->floor_img, row, col);
+// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->floor_img, SIZE * col, SIZE * row);
 // 			else if (data->map[row][col] == 'C')
-// 				put_img(data, data->collectible_img, row, col);
+// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->collectible_img, SIZE * col, SIZE * row);
 // 			else if (data->map[row][col] == 'P')
-// 				put_img(data, data->player_img, row, col);
+// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
 // 			else if (data->map[row][col] == 'E')
-// 				put_img(data, data->exit_img, row, col);
+// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
 // 		}
 // 	}
 // }
-
-void	put_img_to_map(t_data *data)
-{
-	int	row;
-	int	col;
-
-	row = -1;
-	while (++row < data->rows)
-	{
-		col = -1;
-		while (++col < data->columns)
-		{
-			if (data->map[row][col] == '1')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->wall_img, SIZE * col, SIZE * row);
-			else if (data->map[row][col] == '0')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->floor_img, SIZE * col, SIZE * row);
-			else if (data->map[row][col] == 'C')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->collectible_img, SIZE * col, SIZE * row);
-			else if (data->map[row][col] == 'P')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
-			else if (data->map[row][col] == 'E')
-				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
-		}
-	}
-}
 
 /*
 mlx_loop():
@@ -127,6 +145,7 @@ void	launch_graphics(t_data *data)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SIZE * data->columns, SIZE * data->rows, "mouse getting into fights");
 	set_img_ptr(data);
 	put_img_to_map(data);
+	display_steps(data);
 	mlx_loop(data->mlx_ptr);
 
 }
