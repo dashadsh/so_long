@@ -6,48 +6,33 @@
 // the program must exit in a clean way, 
 // and return "Error\n" followed by an explicit error message of your choice.
 //===================================================================================
-/*
-free 2d array of chars
-*/
-void	ft_clear(char **str)
-{
-	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
+// void	zero_init(t_data *data)
+// {
+// 	// data->map = NULL;
+// 	// data->duplicate = NULL;
+// 	data->mlx_ptr = NULL;
+// 	data->win_ptr = NULL;
 
-/*
-free 2d array of ints
-*/
-void	ft_clear2(int **str)
-{
-	int	i;
+// 	// data->win = NULL;
+// 	data->rows = 0;
+// 	data->columns = 0;
+// 	data->player = 0;
+// 	data->collectible = 0;
+// 	data->exit = 0;
 
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
+// 	data->row_pos = 0;
+// 	data->col_pos = 0;
 
-void	free_struct(t_data *data)
-{
-	if (data->map)
-		ft_clear(data->map);
-	if (data->duplicate)
-		ft_clear2(data->duplicate);
-}
-
+// 	// data->steps = 0;
+// 	// data->collected = 0;
+// 	data->wall_img = NULL;
+// 	data->floor_img = NULL;
+// 	data->collectible_img = NULL;
+// 	data->exit_img = NULL;
+// 	data->player_img = NULL;
+// 	data->img_wh = 0;
+// }
 
 int main(int ac, char **av)
 {
@@ -57,13 +42,11 @@ int main(int ac, char **av)
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 	{
-		error_msg("Couldn't malloc structure\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Couldn't malloc structure\n");
 	}
+	// zero_init(data);
 	read_map(data, av); //read_map, check_map
 	check_map(data);
-	// free_struct(data);
-	// run_window();
 	launch_graphics(data);
 
 }

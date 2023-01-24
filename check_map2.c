@@ -13,16 +13,15 @@ void	allocate_duplicate_memory(t_data *data)
 
 	i = 0;
 	data->duplicate = ft_calloc(data->rows + 1, sizeof(int *)); // array of pointers
-	// here we need +1 to END THE MAP
+	// no need 
 	if (!data->duplicate) 	// otherwithe it will be: sizeof(char)
 	{
 		free_struct(data);
-		error_msg("Couldn't malloc data->duplicate to check the path\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Couldn't malloc data->duplicate to check the path\n");
 	}
 	while (i < data->rows)
 	{
-		data->duplicate[i] = ft_calloc(data->columns, sizeof(int)); // +1 ??
+		data->duplicate[i] = ft_calloc(data->columns + 1, sizeof(int)); // +1 ??
 		i++;
 	}
 }
@@ -66,8 +65,7 @@ void	check_access(t_data *data)
 	if (collectible + map_exit != data->collectible + 1)
 		{
 			free_struct(data);
-			error_msg("Couldn't access all collectibles/exit!\n");
-			exit(EXIT_FAILURE);
+			error_msg_exit("Couldn't access all collectibles/exit!\n");
 		}
 }
 

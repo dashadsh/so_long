@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 
-# define SIZE 128 // which size set?? size of img
+# define SIZE 64 // which size set?? size of img
 # define WALL "./img/wall.xpm"
 # define FLOOR "./img/floor.xpm"
 # define PLAYER "./img/player.xpm"
@@ -30,6 +30,7 @@
 typedef struct s_data
 {
 	char	**map;
+
 	int		rows;
 	int		columns;
 	int		player;
@@ -57,18 +58,20 @@ typedef struct s_data
 
 /* error.c */
 void 	error_msg(char *msg);
+void	error_msg_exit(char *msg);
+void	error_msg_free_exit(char *msg, t_data *data);
 
 /* read_map.c */
 int		open_file(t_data *data, char **av);
-// void	count_row_length(t_data *data, char **av); // to be deleted?
 void	count_rows(t_data *data, char **av);
+void	tiny_map_error_check(t_data *data);
 void 	allocate_map_memory(t_data *data);
 void	read_map(t_data *data, char **av);
 
 /* check_map1.c */
 void	check_0_1_p_c_e(t_data *data);
 void 	check_walls(t_data *data);
-// void	count_p_c_e(t_data *data);
+void	count_p_c_e(t_data *data);
 void	check_p_c_e(t_data *data);
 
 /* check_map2.c */
@@ -82,14 +85,17 @@ void	check_map(t_data *data);
 void	dot_ber_check(char **av);
 void 	early_error_check(int ac, char **av);
 
-/* main.c */
+/*free_struct */
 void	ft_clear(char **str);
+void	ft_clear2(int **str);
 void	free_struct(t_data *data);
+
+/* main.c */
 int 	main(int ac, char **av);
 
 /* graphics.c */
-//void	run_window(void);
-void	load_img(t_data *data);
+void	set_img_ptr(t_data *data);
+void	put_img_to_map(t_data *data);
 void	launch_graphics(t_data *data);
 
 # endif

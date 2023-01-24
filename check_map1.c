@@ -31,8 +31,7 @@ void	check_0_1_p_c_e(t_data *data)
 			{
 				// printf("row: %d	column: %d\n", row, column);
 				free_struct(data);
-				error_msg("Map should contain 01PCE chars only\n");
-				exit(EXIT_FAILURE);
+				error_msg_exit("Map should contain 01PCE chars only\n");
 			}
 		}
 	//	printf("inner loop end. column outside the range\nrow: %d	column: %d\n", row, column);
@@ -57,8 +56,7 @@ void	check_walls(t_data *data)
 			|| (data->map[data->rows-1][col] != '1'))
 			{
 				free_struct(data);
-				error_msg("Surrounding wall should contain '1' only\n");
-				exit(EXIT_FAILURE);
+				error_msg_exit("Surrounding wall should contain '1' only\n");
 			}
 	}
 	// printf("loop for horizontal walls ended\ncolumn outside of range: %d\n\n", column);
@@ -67,8 +65,7 @@ void	check_walls(t_data *data)
 			|| (data->map[row][data->columns-1] != '1'))
 			{
 				free_struct(data);
-				error_msg("Surrounding wall should contain '1' only\n");
-				exit(EXIT_FAILURE);
+				error_msg_exit("Surrounding wall should contain '1' only\n");
 			}
 	// printf("loop for vertical walls ended\nrow outside of range: %d\n\n", row);
 }
@@ -111,13 +108,11 @@ void	check_p_c_e(t_data *data)
 	if (data->player != 1 || data->exit != 1)
 	{
 		free_struct(data);
-		error_msg("Map should contain 1 player and 1 exit\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Map should contain 1 player and 1 exit\n");
 	}
 	if (data->collectible < 1)
 	{
 		free_struct(data);
-		error_msg("Map should contain at least one collectible\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Map should contain at least one collectible\n");
 	}
 }

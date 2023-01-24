@@ -12,8 +12,7 @@ void	dot_ber_check(char **av)
 		return ;
 	else
 	{
-		error_msg("Incorrect map format, should be .ber\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Incorrect map format, should be .ber\n");
 	}
 }
 
@@ -21,8 +20,7 @@ void	early_error_check(int ac, char **av) //no malloc's yet
 {
 	if (ac != 2)
 	{
-		error_msg("Wrong amount of arguments, try: ./so_long map.ber\n");
-		exit(EXIT_FAILURE);
+		error_msg_exit("Wrong amount of arguments, try: ./so_long map.ber\n");
 	}
 	dot_ber_check(av);
 }
