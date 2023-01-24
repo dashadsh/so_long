@@ -34,6 +34,18 @@
 // 	data->img_wh = 0;
 // }
 
+int	exit_game(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->wall_img);
+	mlx_destroy_image(data->mlx_ptr, data->floor_img);
+	mlx_destroy_image(data->mlx_ptr, data->player_img);
+	mlx_destroy_image(data->mlx_ptr, data->collectible_img);
+	mlx_destroy_image(data->mlx_ptr, data->exit_img);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	free_struct(data);
+	exit(0);
+}
+
 int main(int ac, char **av)
 {
 	t_data *data;

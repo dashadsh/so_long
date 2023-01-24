@@ -6,7 +6,7 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2023/01/24 15:24:17 by dgoremyk         ###   ########.fr        #
+#    Updated: 2023/01/24 16:29:26 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc -g
 #CFLAGS = -g
 #CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
-SRC = main.c free_struct.c early_error_check.c read_map.c check_map1.c check_map2.c error.c graphics.c moves.c
+SRC = main.c free_struct.c early_error_check.c read_map.c messages.c check_map1.c check_map2.c error.c graphics.c moves.c
 OBJ = $(SRC:.c=.o)
 # APPLEFLAGS = -framework OpenGL -framework AppKit
 

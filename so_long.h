@@ -18,14 +18,16 @@
 # define SIZE 64 // which size set?? size of img
 # define WALL "./img/wall.xpm"
 # define FLOOR "./img/floor.xpm"
-# define PLAYER "./img/player.xpm"
-# define COLLECTIBLE "./img/collectible.xpm"
+# define PLAYER "./img/player_right.xpm"
+# define COLLECTIBLE "./img/collectible_left.xpm"
 # define EXIT "./img/exit.xpm"
-// # define KEY_W 13
-// # define KEY_A 0
-// # define KEY_S 1
-// # define KEY_D 2
-// # define KEY_ESC 53
+
+# define X_CLOSE 17
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
 
 typedef struct s_data
 {
@@ -54,8 +56,9 @@ typedef struct s_data
 	void	*exit_img;
 	// int		img_wh;
 
+	char	last_pos;
 	int		steps;
-	// int		collected;
+	int		collected;
 
 } 				t_data;
 
@@ -94,15 +97,22 @@ void	ft_clear2(int **str);
 void	free_struct(t_data *data);
 
 /* main.c */
+int		exit_game(t_data *data);
 int 	main(int ac, char **av);
 
 /* graphics.c */
+void put_img(t_data *data, int row, int col);
+void	move_player(t_data *data, int row, int col);
 void	set_img_ptr(t_data *data);
-void	put_img(t_data *data, void *img, int row, int col);
-void	put_img_to_map(t_data *data);
+// void	put_img(t_data *data, void *img, int row, int col);
+void	create_map(t_data *data);
+void	create_new_map(t_data *data);
 void	launch_graphics(t_data *data);
 
 /* moves.c */
+
+/* messages.c */
 void	display_steps(t_data *data);
+
 
 # endif
