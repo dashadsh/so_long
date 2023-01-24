@@ -177,8 +177,22 @@ void	move_d(t_data *data)
 {
 	if (data->map[data->row_pos][data->col_pos + 1] == '1')
 		return ;
+	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+		data->collected != data->collectible)
+		return ;
 	data->steps++;
 	data->col_pos++;
+	if (data->map[data->row_pos][data->col_pos + 1] == 'E')
+	{
+		ft_putstr_fd("BYE!", 1);
+		exit_game(data);
+	}
+
+	if (data->map[data->row_pos][data->col_pos] == 'C')
+	{
+		data->collected++;
+		// printf("%d cat hit\n", data->collected);
+	}
 	data->map[data->row_pos][data->col_pos] = 'P';
 	data->map[data->row_pos][data->col_pos - 1] = '0';
 	create_new_map(data);
