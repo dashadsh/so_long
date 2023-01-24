@@ -31,12 +31,25 @@ void	go_through_map(t_data *data, int row, int col) //y starts with 0, columns w
 	if (data->map[row][col] != '1' && !data->duplicate[row][col])  // != 1
 	{
 		data->duplicate[row][col] = 1;
+		
 		go_through_map(data, row, col + 1);
 		go_through_map(data, row, col - 1);
 		go_through_map(data, row + 1, col);
 		go_through_map(data, row - 1, col);
 	}
 }
+
+// void	go_through_map(t_data *data, int row, int col) //y starts with 0, columns with 1
+// {
+// 	if (data->map[row][col] != '1' && !data->duplicate[row][col])  // != 1
+// 	{
+// 		data->duplicate[row][col] = 1;
+// 		go_through_map(data, row, col + 1);
+// 		go_through_map(data, row, col - 1);
+// 		go_through_map(data, row + 1, col);
+// 		go_through_map(data, row - 1, col);
+// 	}
+// }
 
 void	check_access(t_data *data)
 {

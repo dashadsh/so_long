@@ -29,6 +29,8 @@ void	set_img_ptr(t_data *data)
 	data->player_img = mlx_xpm_file_to_image(data->mlx_ptr, PLAYER, &img_wh, &img_wh);
 	data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr, COLLECTIBLE, &img_wh, &img_wh);
 	data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT, &img_wh, &img_wh);
+	data->winner_img = mlx_xpm_file_to_image(data->mlx_ptr, WINNER, &img_wh, &img_wh);
+
 		// ---------------------------------------------------------------------------------------------
 		// ALSO WORKING
 	// data->floor_img = mlx_xpm_file_to_image(data->mlx_ptr, FLOOR, &data->img_wh, &data->img_wh);
@@ -116,6 +118,8 @@ void	put_img(t_data *data, int row, int col)
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
+	else if (data->map[row][col] == 'W')
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->winner_img, SIZE * col, SIZE * row);
 }
 
 void	create_map(t_data *data)
@@ -177,26 +181,76 @@ void	move_d(t_data *data)
 {
 	if (data->map[data->row_pos][data->col_pos + 1] == '1')
 		return ;
-	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
-		data->collected != data->collectible)
-		return ;
-	data->steps++;
-	data->col_pos++;
-	if (data->map[data->row_pos][data->col_pos + 1] == 'E')
-	{
-		ft_putstr_fd("BYE!", 1);
-		exit_game(data);
-	}
-
-	if (data->map[data->row_pos][data->col_pos] == 'C')
+	if (data->map[data->row_pos][data->col_pos + 1] == 'E' && 
+		data->collected == data->collectible)
+		{
+			data->steps++;
+			data->col_pos++;
+			data->map[data->row_pos][data->col_pos] = 'W';
+			data->map[data->row_pos][data->col_pos - 1] = '0';
+			create_new_map(data);
+			// sleep(1);
+			ft_putstr_fd("BYE!", 1); 
+			// exit_game(data); // no chance to show final picture
+			return ;
+		}
+	if (data->map[data->row_pos][data->col_pos + 1] == 'C')
 	{
 		data->collected++;
-		// printf("%d cat hit\n", data->collected);
+		printf("cats hit: %d, total: %d\n", data->collected, data->collectible);
 	}
-	data->map[data->row_pos][data->col_pos] = 'P';
-	data->map[data->row_pos][data->col_pos - 1] = '0';
+	data->map[data->row_pos][data->col_pos + 1] = 'P';
+	data->map[data->row_pos][data->col_pos] = '0';
+	data->steps++;
+	data->col_pos++;
 	create_new_map(data);
 }
+
+// 	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+// 		data->collected == data->collectible)
+// 		{
+// 			data->steps++;
+// 			data->collected++;
+// 			printf("cats hit: %d\n", data->collected);
+// 			data->col_pos++;
+// 			data->map[data->row_pos][data->col_pos] = 'W';
+// 			data->map[data->row_pos][data->col_pos - 1] = '0';
+// 			create_new_map(data);
+// 			sleep(1);
+// 			ft_putstr_fd("BYE!", 1);
+// 			exit_game(data);
+// 		}
+// 	if (data->map[data->row_pos][data->col_pos + 1] == 'C')
+// 	{
+// 		data->collected++;
+// 		printf("cats hit: %d\n", data->collected);
+// 	}
+// 	data->steps++;
+// 	data->col_pos++;
+// 	data->map[data->row_pos][data->col_pos] = 'P';
+// 	data->map[data->row_pos][data->col_pos - 1] = '0';
+// 	create_new_map(data);
+// 	// 	data->map[data->row_pos][data->col_pos] == 'W';
+// 	// 	create_new_map(data);
+// 	// 	sleep(3);
+// 	// 	ft_putstr_fd("BYE!", 1);
+// 	// 	exit_game(data);
+// 	// }
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+// 	// 	data->collected != data->collectible)
+// 	// 	return ;
+// 	// data->last_pos = 'E';
+// 	// data->steps++;
+// 	// data->col_pos++;
+// 	// if (data->map[data->row_pos][data->col_pos] == 'C')
+// 	// {
+// 	// 	data->collected++;
+// 	// 	printf("%d cat hit\n", data->collected);
+// 	// }
+// 	// data->map[data->row_pos][data->col_pos] = 'P';
+// 	// data->map[data->row_pos][data->col_pos - 1] = '0';
+// 	// create_new_map(data);
+// }
 
 int	key_hook(int key, t_data *data)
 {
