@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:03:30 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 21:46:23 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:13:19 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,12 @@ void	early_error_check(int ac, char **av);
 
 /* read_map.c */
 int		open_file(t_data *data, char **av);
-void	count_rows(t_data *data, char **av);
+// void	count_rows(t_data *data, char **av);
+void	count_col_rows(t_data *data, char **av);
 void	tiny_map_error_check(t_data *data);
-void	allocate_map_memory(t_data *data);
+void	rectangular_check(t_data *data, char **av);
+void	rectangular_check2(t_data *data, int fd);
+void	allocate_map_memory(t_data *data, int fd);
 void	read_map(t_data *data, char **av);
 
 /* check_map1.c */
