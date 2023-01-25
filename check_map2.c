@@ -39,18 +39,6 @@ void	go_through_map(t_data *data, int row, int col) //y starts with 0, columns w
 	}
 }
 
-// void	go_through_map(t_data *data, int row, int col) //y starts with 0, columns with 1
-// {
-// 	if (data->map[row][col] != '1' && !data->duplicate[row][col])  // != 1
-// 	{
-// 		data->duplicate[row][col] = 1;
-// 		go_through_map(data, row, col + 1);
-// 		go_through_map(data, row, col - 1);
-// 		go_through_map(data, row + 1, col);
-// 		go_through_map(data, row - 1, col);
-// 	}
-// }
-
 void	check_access(t_data *data)
 {
 	int	collectible;
@@ -86,17 +74,6 @@ void	check_path(t_data *data)
 {
 	allocate_duplicate_memory(data);
 	go_through_map(data, data->row_pos, data->col_pos);
-	// int y = -1;
-	// int x;
-	// while (++y < data->rows)
-	// {
-	// 	x = -1;
-	// 	while  (++x < data->columns)
-	// 	{
-	// 		printf("%i ", data->duplicate[y][x]);
-	// 	}
-	// 	printf("\n");
-	// }
 	check_access(data);
 }
 

@@ -1,10 +1,4 @@
 
-
-//======================================================================
-// count_rows additionnly checks for: Empty file
-//
-// read_map additionally checks for: Map should be rectangular
-//======================================================================
 // when allocating map memory - should it be rows+1???
 // change where is checked for row lenght  - can be done when counting rows
 //======================================================================
@@ -29,7 +23,6 @@ int	open_file(t_data *data, char **av)
 	return(fd);
 }
 
-/* added check for rectangular map here */
 void	count_rows(t_data *data, char **av)
 {
 	int	fd;
@@ -74,7 +67,7 @@ allocates memory for the 2d map:
 array or char pointers
 otherwithe it will be: sizeof(char)
 
-calloc + 1?? need to allocate +1 to set end of the map ??
+????????? calloc + 1?? need to allocate +1 to set end of the map ??
 */
 void 	allocate_map_memory(t_data *data)
 {

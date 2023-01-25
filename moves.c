@@ -1,16 +1,170 @@
+
+
 #include "so_long.h"
 
-// void	is_exit(t_data *data, int row, int col)
+
+
+// void	move_w(t_data *data)
 // {
-// 	if (data->collectible != data->collected)
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos - 1][data->col_pos] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// 	else if (data->map[data->row_pos - 1][data->col_pos] == '0' ||
+// 		data->map[data->row_pos - 1][data->col_pos] == 'C')
 // 	{
-// 		ft_printf("mouse must fight with all cats first\n");
-// 		change_position(data, row, col);
-// 	}
-// 	else
-// 	{
-// 		ft_printf("you won!\n");
-// 		// free_destroy(data);
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos - 1][data->col_pos] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->row_pos--;
 // 	}
 // }
 
+// void	move_s(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos + 1][data->col_pos] == '0' ||
+// 		data->map[data->row_pos + 1][data->col_pos] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos + 1][data->col_pos] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->row_pos++;
+// 	}
+// 	else if (data->map[data->row_pos + 1][data->col_pos] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// }
+
+// void	move_d(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos][data->col_pos + 1] == '0' ||
+// 		data->map[data->row_pos][data->col_pos + 1] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		// data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos][data->col_pos + 1] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->col_pos++;
+// 	}
+// 	else if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// }
+
+// void	move_a(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos][data->col_pos - 1] == '0' ||
+// 		data->map[data->row_pos][data->col_pos - 1] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos][data->col_pos - 1] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->col_pos--;
+// 	}
+// 	else if (data->map[data->row_pos][data->col_pos - 1] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// }
+
+void	move_d(t_data *data)
+{
+	if (data->map[data->row_pos][data->col_pos + 1] == '1')
+		return ;
+	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos][data->col_pos + 1];
+	data->map[data->row_pos][data->col_pos + 1] = 'P';
+	create_new_map(data);
+	data->col_pos++;
+}
+
+void	move_a(t_data *data)
+{
+	if (data->map[data->row_pos][data->col_pos - 1] == '1')
+		return ;
+	if (data->map[data->row_pos][data->col_pos - 1] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos][data->col_pos - 1];
+	data->map[data->row_pos][data->col_pos - 1] = 'P';
+	create_new_map(data);
+	data->col_pos--;
+}
+
+void	move_w(t_data *data)
+{
+	if (data->map[data->row_pos - 1][data->col_pos] == '1')
+		return ;
+	if (data->map[data->row_pos - 1][data->col_pos] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos - 1][data->col_pos];
+	data->map[data->row_pos - 1][data->col_pos] = 'P';
+	create_new_map(data);
+	data->row_pos--;
+}
+
+void	move_s(t_data *data)
+{
+	if (data->map[data->row_pos + 1][data->col_pos] == '1')
+		return ;
+	if (data->map[data->row_pos + 1][data->col_pos] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos + 1][data->col_pos];
+	data->map[data->row_pos + 1][data->col_pos] = 'P';
+	create_new_map(data);
+	data->row_pos++;
+}
