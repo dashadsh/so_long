@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:06:28 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 23:11:22 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:53:59 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	count_col_rows(t_data *data, char **av)
 	fd = open_file(data, av);
 	line = get_next_line(fd);
 	if (line)
-		data->columns = ft_strlen(line) - 1;
+		data->columns = int_strlen(line) - 1;
 	else
 	{
 		free_struct(data);//free(data)
@@ -121,7 +121,7 @@ void	rectangular_check2(t_data *data, int fd)
 	while (i++ < (data->rows) - 1)
 	{
 		line = get_next_line(fd);
-		if (data->columns != ft_strlen(line) - 1)
+		if (data->columns != int_strlen(line) - 1)
 		{
 			free(line);
 			close(fd);
@@ -131,7 +131,7 @@ void	rectangular_check2(t_data *data, int fd)
 		free(line);
 	}
 	line = get_next_line(fd);
-	if (data->columns != ft_strlen(line))
+	if (data->columns != int_strlen(line))
 	{
 		free(line);
 		close(fd);

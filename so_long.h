@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:03:30 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 23:13:19 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:52:08 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ void	free_struct(t_data *data);
 /* messages.c */
 void	display_steps(t_data *data);
 
+int	int_strlen(const char *s);
 #endif

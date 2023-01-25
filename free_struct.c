@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:04:32 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 21:05:00 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:08:43 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,15 @@ void	free_struct(t_data *data)
 		ft_clear(data->map);
 	if (data->duplicate)
 		ft_clear2(data->duplicate);
+	if (data->mlx_ptr)
+		free(data->mlx_ptr);
+	if (data->win_ptr)
+		free(data->win_ptr);
+	// void	*floor_img;
+	// void	*wall_img;
+	// void	*player_img;
+	// void	*collectible_img;
+	// void	*exit_img;
+	// void	*exit_open_img;
 	free(data);
 }
