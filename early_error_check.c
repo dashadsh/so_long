@@ -16,7 +16,7 @@ void	dot_ber_check(char **av)
 	}
 }
 
-void	early_error_check(int ac, char **av) //no malloc's yet
+void	early_error_check(int ac, char **av)
 {
 	if (ac != 2)
 	{

@@ -6,15 +6,15 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:03:30 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 16:21:04 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/25 21:46:23 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H 
 
-#include "./mlx/mlx.h"
-#include "./libft/libft.h"
+# include "./mlx/mlx.h"
+# include "./libft/libft.h"
 
 /* library for printf*/
 # include <stdio.h> 
@@ -31,7 +31,6 @@
 # define PLAYER "./img/player_right.xpm"
 # define COLLECTIBLE "./img/collectible_left.xpm"
 # define EXIT "./img/exit.xpm"
-# define WINNER "./img/winner.xpm"
 # define EXIT_OPEN "./img/exit_open.xpm"
 
 # define X_CLOSE 17
@@ -60,33 +59,32 @@ typedef struct s_data
 	void	*collectible_img;
 	void	*exit_img;
 	void	*exit_open_img;
-	void	*winner_img;
 	char	last_pos;
 	int		steps;
-} 				t_data;
+}	t_data;
 
 /* main.c */
-int 	main(int ac, char **av);
+int		main(int ac, char **av);
 
 /* error_msg.c */ //ALL NEEDEED???
-void 	error_msg(char *msg);
+void	error_msg(char *msg);
 void	error_msg_exit(char *msg);
 void	error_msg_free_exit(char *msg, t_data *data);
 
 /* early_error_check */
 void	dot_ber_check(char **av);
-void 	early_error_check(int ac, char **av);
+void	early_error_check(int ac, char **av);
 
 /* read_map.c */
 int		open_file(t_data *data, char **av);
 void	count_rows(t_data *data, char **av);
 void	tiny_map_error_check(t_data *data);
-void 	allocate_map_memory(t_data *data);
+void	allocate_map_memory(t_data *data);
 void	read_map(t_data *data, char **av);
 
 /* check_map1.c */
 void	check_0_1_p_c_e(t_data *data);
-void 	check_walls(t_data *data);
+void	check_walls(t_data *data);
 void	count_p_c_e(t_data *data);
 void	check_p_c_e(t_data *data);
 
@@ -124,4 +122,4 @@ void	free_struct(t_data *data);
 /* messages.c */
 void	display_steps(t_data *data);
 
-# endif
+#endif

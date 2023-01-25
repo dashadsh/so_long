@@ -1,8 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 21:05:45 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/01/25 21:06:23 by dgoremyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 // void	move_w(t_data *data)
 // {
@@ -99,9 +107,9 @@ void	move_d(t_data *data)
 		return ;
 	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
 		!is_c(data))
-		{
-			finish_the_game(data);		
-		}
+	{
+		finish_the_game(data);
+	}
 	data->steps++;
 	if (data->last_pos == 'C')
 			data->last_pos = '0';
@@ -118,9 +126,9 @@ void	move_a(t_data *data)
 		return ;
 	if (data->map[data->row_pos][data->col_pos - 1] == 'E' &&
 		!is_c(data))
-		{
-			finish_the_game(data);		
-		}
+	{
+		finish_the_game(data);
+	}
 	data->steps++;
 	if (data->last_pos == 'C')
 			data->last_pos = '0';
@@ -137,9 +145,9 @@ void	move_w(t_data *data)
 		return ;
 	if (data->map[data->row_pos - 1][data->col_pos] == 'E' &&
 		!is_c(data))
-		{
-			finish_the_game(data);		
-		}
+	{
+		finish_the_game(data);
+	}
 	data->steps++;
 	if (data->last_pos == 'C')
 			data->last_pos = '0';
@@ -156,9 +164,9 @@ void	move_s(t_data *data)
 		return ;
 	if (data->map[data->row_pos + 1][data->col_pos] == 'E' &&
 		!is_c(data))
-		{
-			finish_the_game(data);		
-		}
+	{
+		finish_the_game(data);
+	}
 	data->steps++;
 	if (data->last_pos == 'C')
 			data->last_pos = '0';

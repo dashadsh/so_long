@@ -1,37 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 20:57:25 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/01/25 21:48:32 by dgoremyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
-
-//==================CHECK=VALID=PATH======================
-// create duplicate map
- 
-//what about + 1 for allocation???
 
 /* calloc 2d array in size of map */
 void	allocate_duplicate_memory(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	data->duplicate = ft_calloc(data->rows + 1, sizeof(int *)); // array of pointers
-	// no need 
-	if (!data->duplicate) 	// otherwithe it will be: sizeof(char)
+	data->duplicate = ft_calloc(data->rows + 1, sizeof(int *));
+	if (!data->duplicate)
 	{
 		free_struct(data);
 		error_msg_exit("Couldn't malloc data->duplicate to check the path\n");
 	}
 	while (i < data->rows)
 	{
-		data->duplicate[i] = ft_calloc(data->columns + 1, sizeof(int)); // +1 ??
+		data->duplicate[i] = ft_calloc(data->columns + 1, sizeof(int));
 		i++;
 	}
 }
 
-void	go_through_map(t_data *data, int row, int col) //y starts with 0, columns with 1
+void	go_through_map(t_data *data, int row, int col)
 {
-	if (data->map[row][col] != '1' && !data->duplicate[row][col])  // != 1
+	if (data->map[row][col] != '1' && !data->duplicate[row][col])
 	{
 		data->duplicate[row][col] = 1;
-		
 		go_through_map(data, row, col + 1);
 		go_through_map(data, row, col - 1);
 		go_through_map(data, row + 1, col);
@@ -52,22 +56,18 @@ void	check_access(t_data *data)
 	while (++row < data->rows)
 	{
 		col = -1;
-		while  (++col < data->columns)
+		while (++col < data->columns)
 		{
-			if (data->map[row][col] == 'C' && data->duplicate[row][col]) //make sure this spot was visited
+			if (data->map[row][col] == 'C' && data->duplicate[row][col])
 				collectible++;
 			if (data->map[row][col] == 'E' && data->duplicate[row][col])
 				map_exit++;
 		}
 	}
-	// printf("%i\n", c);
-	// printf("%i\n", data->collectible);
-	// printf("%i\n", e);
 	if (collectible + map_exit != data->collectible + 1)
-		{
-			free_struct(data);
-			error_msg_exit("Couldn't access all collectibles/exit!\n");
-		}
+	{
+		error_msg_free_exit("Path is invalid!\n", data);
+	}
 }
 
 void	check_path(t_data *data)
@@ -83,4 +83,4 @@ void	check_map(t_data *data)
 	check_walls(data);
 	check_p_c_e(data);
 	check_path(data);
-}	
+}

@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:04:31 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 16:17:44 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/01/25 21:05:16 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	zero_init(t_data *data)
 }
 */
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	early_error_check(ac, av);
 	data = ft_calloc(1, sizeof(t_data));
@@ -51,8 +51,7 @@ int main(int ac, char **av)
 	{
 		error_msg_exit("Couldn't malloc structure\n");
 	}
-	// zero_init(data);
-	read_map(data, av); //read_map, check_map
+	read_map(data, av);
 	check_map(data);
 	launch_graphics(data);
 	return (0);

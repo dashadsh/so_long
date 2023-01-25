@@ -17,28 +17,25 @@ loads the images and defined pointer points to given image
 
 It will also SET (!!! => &data->img_wh) the img_wh (width/hight) accordingly, 
 which is ideal when reading sprites
+
+	// working - img_wh from data should be removed
+
 */
 void	set_img_ptr(t_data *data)
 {
-	// working - img_wh from data should be removed
-	int img_wh;
+	int	img_wh;
 
 	img_wh = 0;
-	data->floor_img = mlx_xpm_file_to_image(data->mlx_ptr, FLOOR, &img_wh, &img_wh);
-	data->wall_img = mlx_xpm_file_to_image(data->mlx_ptr, WALL, &img_wh, &img_wh);
-	data->player_img = mlx_xpm_file_to_image(data->mlx_ptr, PLAYER, &img_wh, &img_wh);
-	data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr, COLLECTIBLE, &img_wh, &img_wh);
-	data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT, &img_wh, &img_wh);
-	data->exit_open_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT_OPEN, &img_wh, &img_wh);
-	data->winner_img = mlx_xpm_file_to_image(data->mlx_ptr, WINNER, &img_wh, &img_wh);
-
-		// ---------------------------------------------------------------------------------------------
-		// ALSO WORKING
-	// data->floor_img = mlx_xpm_file_to_image(data->mlx_ptr, FLOOR, &data->img_wh, &data->img_wh);
-	// data->wall_img = mlx_xpm_file_to_image(data->mlx_ptr, WALL, &data->img_wh, &data->img_wh);
-	// data->player_img = mlx_xpm_file_to_image(data->mlx_ptr, PLAYER, &data->img_wh, &data->img_wh);
-	// data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr, COLLECTIBLE, &data->img_wh, &data->img_wh);
-	// data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT, &data->img_wh, &data->img_wh);
+	data->floor_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			FLOOR, &img_wh, &img_wh);
+	data->wall_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			WALL, &img_wh, &img_wh);
+	data->player_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			PLAYER, &img_wh, &img_wh);
+	data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			COLLECTIBLE, &img_wh, &img_wh);
+	data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			EXIT, &img_wh, &img_wh);
 }
 
 /*
@@ -49,86 +46,29 @@ the window to use, and the image
 The (x , y) coordinates define where the image should be placed in the window.
 */
 
-// void	put_img(t_data *data, void *img, int row, int col)
-// {
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img, SIZE * col, \
-// 			SIZE * row);
-// }
-
-// void	create_map(t_data *data)
-// {
-// 	int	row;
-// 	int	col;
-
-// 	row = -1;
-// 	while (++row < data->rows)
-// 	{
-// 		col = -1;
-// 		while (++col < data->columns)
-// 		{
-// 			if (data->map[row][col] == '1')
-// 				put_img(data, data->wall_img, row, col);
-// 			else if (data->map[row][col] == '0')
-// 				put_img(data, data->floor_img, row, col);
-// 			else if (data->map[row][col] == 'C')
-// 				put_img(data, data->collectible_img, row, col);
-// 			else if (data->map[row][col] == 'P')
-// 				put_img(data, data->player_img, row, col);
-// 			else if (data->map[row][col] == 'E')
-// 				put_img(data, data->exit_img, row, col);
-// 		}
-// 	}
-// }
-//--------------------------------------------------------------
-
-// void	create_map(t_data *data)
-// {
-// 	int	row;
-// 	int	col;
-// 	row = -1;
-// 	while (++row < data->rows)
-// 	{
-// 		col = -1;
-// 		while (++col < data->columns)
-// 		{
-// 			if (data->map[row][col] == '1')
-// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->wall_img, SIZE * col, SIZE * row);
-// 			else if (data->map[row][col] == '0')
-// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->floor_img, SIZE * col, SIZE * row);
-// 			else if (data->map[row][col] == 'C')
-// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->collectible_img, SIZE * col, SIZE * row);
-// 			else if (data->map[row][col] == 'P')
-// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
-// 			else if (data->map[row][col] == 'E')
-// 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
-// 		}
-// 	}
-// }
-//--------------------------------------------------------------
-
-
 void	put_img(t_data *data, int row, int col)
 {
 	if (data->map[row][col] == '1')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->wall_img, SIZE * col, SIZE * row);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->wall_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == '0')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->floor_img, SIZE * col, SIZE * row);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->floor_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'C')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->collectible_img, SIZE * col, SIZE * row);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->collectible_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'P')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->player_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'E')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
-	else if (data->map[row][col] == 'O')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_open_img, SIZE * col, SIZE * row);
-	else if (data->map[row][col] == 'W')
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->winner_img, SIZE * col, SIZE * row);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->exit_img, SIZE * col, SIZE * row);
 }
 
 void	create_map(t_data *data)
 {
 	int	row;
-	int col;
+	int	col;
 
 	row = -1;
 	while (++row < data->rows)
@@ -140,6 +80,7 @@ void	create_map(t_data *data)
 		}
 	}
 }
+
 /*
 mlx_init() - init MLX library
 
@@ -170,10 +111,10 @@ void	create_new_map(t_data *data)
 
 int	is_c(t_data *data)
 {
-	int collectible;
-	int row;
-	int col;
-	
+	int	collectible;
+	int	row;
+	int	col;
+
 	collectible = 0;
 	row = -1;
 	while (++row < data->rows)

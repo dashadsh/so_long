@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 21:06:28 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/01/25 21:57:34 by dgoremyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 // when allocating map memory - should it be rows+1???
 // change where is checked for row lenght  - can be done when counting rows
@@ -10,32 +21,37 @@
 
 #include "so_long.h"
 
+/*
+we should open file again to use GNL, 
+because we should read again from the start
+
+free(data); is enough here
+*/
 int	open_file(t_data *data, char **av)
 {
-	int fd; // we should open file again to use GNL, because we should read again from the start
+	int	fd;
 
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		free_struct(data); // free(data);
+		free_struct(data);
 		error_msg_exit("Couldn't open the file\n");
 	}
-	return(fd);
+	return (fd);
 }
 
 void	count_rows(t_data *data, char **av)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open_file(data, av);
 	line = get_next_line(fd);
 	if (line)
 		data->columns = ft_strlen(ft_strtrim(line, "\n"));
- 	else
+	else
 	{
-		free_struct(data); // free(data);
-		error_msg_exit("File is empty\n");
+		error_msg_free_exit("File is empty\n", data); //free(data)
 	}
 	while (line)
 	{
@@ -56,10 +72,10 @@ void	count_rows(t_data *data, char **av)
 void	tiny_map_error_check(t_data *data)
 {
 	if (data->rows < 3)
-		{
-			free_struct(data); //	free(data);
-			error_msg_exit("At least 3 rows needed to build valid map\n");
-		}
+	{
+		error_msg_free_exit("At least 3 rows needed to build valid map\n",
+			data); //	free(data);
+	}
 }
 
 /* 
@@ -69,13 +85,12 @@ otherwithe it will be: sizeof(char)
 
 ????????? calloc + 1?? need to allocate +1 to set end of the map ??
 */
-void 	allocate_map_memory(t_data *data)
+void	allocate_map_memory(t_data *data)
 {
 	data->map = ft_calloc(data->rows + 1, sizeof(char *));
 	if (!data->map)
 	{
-		free_struct(data);
-		error_msg_exit("Couldn't malloc data->map\n");
+		error_msg_free_exit("Couldn't malloc data->map\n", data); //free_struct(data);
 	}
 }
 
@@ -83,8 +98,9 @@ void	read_map(t_data *data, char **av)
 {
 	int		fd;
 	char	*line;
-	int		i = 0;
+	int		i;
 
+	i = 0;
 	fd = open_file(data, av);
 	count_rows(data, av);
 	tiny_map_error_check(data);

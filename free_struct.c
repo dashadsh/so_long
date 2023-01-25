@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/25 21:04:32 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/01/25 21:05:00 by dgoremyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
 /*
 free 2d array of chars
+
+?? 	// str = NULL;
 */
 void	ft_clear(char **str)
 {
@@ -15,11 +28,11 @@ void	ft_clear(char **str)
 		i++;
 	}
 	free(str);
-	// str = NULL;
 }
 
 /*
 free 2d array of ints
+?? 	// str = NULL;
 */
 void	ft_clear2(int **str)
 {
@@ -32,7 +45,6 @@ void	ft_clear2(int **str)
 		i++;
 	}
 	free(str);
-	// str = NULL;
 }
 
 void	free_struct(t_data *data)
