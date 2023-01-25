@@ -22,6 +22,7 @@
 # define COLLECTIBLE "./img/collectible_left.xpm"
 # define EXIT "./img/exit.xpm"
 # define WINNER "./img/winner.xpm"
+# define EXIT_OPEN "./img/exit_open.xpm"
 
 # define X_CLOSE 17
 # define KEY_W 13
@@ -55,12 +56,13 @@ typedef struct s_data
 	void	*player_img;
 	void	*collectible_img;
 	void	*exit_img;
+	void	*exit_open_img;
 	void	*winner_img;
 	// int		img_wh;
 
 	char	last_pos;
 	int		steps;
-	int		collected;
+	//int		collected;
 
 } 				t_data;
 

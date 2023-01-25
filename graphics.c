@@ -29,6 +29,7 @@ void	set_img_ptr(t_data *data)
 	data->player_img = mlx_xpm_file_to_image(data->mlx_ptr, PLAYER, &img_wh, &img_wh);
 	data->collectible_img = mlx_xpm_file_to_image(data->mlx_ptr, COLLECTIBLE, &img_wh, &img_wh);
 	data->exit_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT, &img_wh, &img_wh);
+	data->exit_open_img = mlx_xpm_file_to_image(data->mlx_ptr, EXIT_OPEN, &img_wh, &img_wh);
 	data->winner_img = mlx_xpm_file_to_image(data->mlx_ptr, WINNER, &img_wh, &img_wh);
 
 		// ---------------------------------------------------------------------------------------------
@@ -118,6 +119,8 @@ void	put_img(t_data *data, int row, int col)
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->player_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_img, SIZE * col, SIZE * row);
+	else if (data->map[row][col] == 'O')
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->exit_open_img, SIZE * col, SIZE * row);
 	else if (data->map[row][col] == 'W')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->winner_img, SIZE * col, SIZE * row);
 }
@@ -165,92 +168,227 @@ void	create_new_map(t_data *data)
 	display_steps(data);
 }
 
-// void move_player(t_data *data, int row, int col)
+// void	open_door(t_data *data)
 // {
-// 	data->steps++;
-// 	if (data->map[row][col] == 'C')
-// 	{
-// 		data->collected++; // check if all collected
-// 		printf("collected: %d\n", data->collected);
+// 	int	row;
+// 	int	col;
 
+// 	row = -1;
+// 	while (++row < data->rows)
+// 	{
+// 		col = -1;
+// 		while (++col < data->columns)
+// 		{
+// 			if (data->map[row][col] == 'E')
+// 				data->map[row][col] = 'O';
+// 		}
 // 	}
-// 	create_new_map(data);
+// 	create_map(data);
+// }
+
+// void	display_steps(t_data *data)
+// {
+// 	char	*steps;
+
+// 	steps = ft_itoa(data->steps);
+// 	ft_putstr_fd("steps: ", 1);
+// 	ft_putstr_fd(steps, 1);
+// 	ft_putstr_fd("\n", 1);
+// 	free(steps);
+// }
+
+int	is_c(t_data *data)
+{
+	int collectible;
+	int row;
+	int col;
+	
+	collectible = 0;
+	row = -1;
+	while (++row < data->rows)
+	{
+		col = -1;
+		while (++col < data->columns)
+		{
+			if (data->map[row][col] == 'C')
+				collectible++;
+		}
+	}
+	return (collectible);
+}
+
+void	finish_the_game(t_data *data)
+{
+		data->steps++;
+		display_steps(data);
+		ft_putstr_fd("mouse just left on the balloon!\n", 1);
+		exit_game(data);
+}
+
+// void	move_w(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos - 1][data->col_pos] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// 	else if (data->map[data->row_pos - 1][data->col_pos] == '0' ||
+// 		data->map[data->row_pos - 1][data->col_pos] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos - 1][data->col_pos] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->row_pos--;
+// 	}
+// }
+
+// void	move_s(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos + 1][data->col_pos] == '0' ||
+// 		data->map[data->row_pos + 1][data->col_pos] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos + 1][data->col_pos] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->row_pos++;
+// 	}
+// 	else if (data->map[data->row_pos + 1][data->col_pos] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// }
+
+// void	move_d(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos][data->col_pos + 1] == '0' ||
+// 		data->map[data->row_pos][data->col_pos + 1] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		// data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos][data->col_pos + 1] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->col_pos++;
+// 	}
+// 	else if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
+// }
+
+// void	move_a(t_data *data)
+// {
+// 	// if (data->map[data->row_pos][data->col_pos + 1] == '1')
+// 	// 	return ;
+// 	if (data->map[data->row_pos][data->col_pos - 1] == '0' ||
+// 		data->map[data->row_pos][data->col_pos - 1] == 'C')
+// 	{
+// 		data->steps++;
+// 		data->map[data->row_pos][data->col_pos] = '0';
+// 		data->map[data->row_pos][data->col_pos - 1] = 'P';
+// 		// data->col_pos++;
+// 		// data->col_pos=data->col_pos + 1;
+// 		create_new_map(data);
+// 		data->col_pos--;
+// 	}
+// 	else if (data->map[data->row_pos][data->col_pos - 1] == 'E' &&
+// 		!is_c(data))
+// 		{
+// 			finish_the_game(data);		
+// 		}
 // }
 
 void	move_d(t_data *data)
 {
 	if (data->map[data->row_pos][data->col_pos + 1] == '1')
 		return ;
-	if (data->map[data->row_pos][data->col_pos + 1] == 'E' && 
-		data->collected == data->collectible)
+	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
+		!is_c(data))
 		{
-			data->steps++;
-			data->col_pos++;
-			data->map[data->row_pos][data->col_pos] = 'W';
-			data->map[data->row_pos][data->col_pos - 1] = '0';
-			create_new_map(data);
-			// sleep(1);
-			ft_putstr_fd("BYE!", 1); 
-			// exit_game(data); // no chance to show final picture
-			return ;
+			finish_the_game(data);		
 		}
-	if (data->map[data->row_pos][data->col_pos + 1] == 'C')
-	{
-		data->collected++;
-		printf("cats hit: %d, total: %d\n", data->collected, data->collectible);
-	}
-	data->map[data->row_pos][data->col_pos + 1] = 'P';
-	data->map[data->row_pos][data->col_pos] = '0';
 	data->steps++;
-	data->col_pos++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos][data->col_pos + 1];
+	data->map[data->row_pos][data->col_pos + 1] = 'P';
 	create_new_map(data);
+	data->col_pos++;
 }
 
-// 	if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
-// 		data->collected == data->collectible)
-// 		{
-// 			data->steps++;
-// 			data->collected++;
-// 			printf("cats hit: %d\n", data->collected);
-// 			data->col_pos++;
-// 			data->map[data->row_pos][data->col_pos] = 'W';
-// 			data->map[data->row_pos][data->col_pos - 1] = '0';
-// 			create_new_map(data);
-// 			sleep(1);
-// 			ft_putstr_fd("BYE!", 1);
-// 			exit_game(data);
-// 		}
-// 	if (data->map[data->row_pos][data->col_pos + 1] == 'C')
-// 	{
-// 		data->collected++;
-// 		printf("cats hit: %d\n", data->collected);
-// 	}
-// 	data->steps++;
-// 	data->col_pos++;
-// 	data->map[data->row_pos][data->col_pos] = 'P';
-// 	data->map[data->row_pos][data->col_pos - 1] = '0';
-// 	create_new_map(data);
-// 	// 	data->map[data->row_pos][data->col_pos] == 'W';
-// 	// 	create_new_map(data);
-// 	// 	sleep(3);
-// 	// 	ft_putstr_fd("BYE!", 1);
-// 	// 	exit_game(data);
-// 	// }
-// 	// if (data->map[data->row_pos][data->col_pos + 1] == 'E' &&
-// 	// 	data->collected != data->collectible)
-// 	// 	return ;
-// 	// data->last_pos = 'E';
-// 	// data->steps++;
-// 	// data->col_pos++;
-// 	// if (data->map[data->row_pos][data->col_pos] == 'C')
-// 	// {
-// 	// 	data->collected++;
-// 	// 	printf("%d cat hit\n", data->collected);
-// 	// }
-// 	// data->map[data->row_pos][data->col_pos] = 'P';
-// 	// data->map[data->row_pos][data->col_pos - 1] = '0';
-// 	// create_new_map(data);
-// }
+void	move_a(t_data *data)
+{
+	if (data->map[data->row_pos][data->col_pos - 1] == '1')
+		return ;
+	if (data->map[data->row_pos][data->col_pos - 1] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos][data->col_pos - 1];
+	data->map[data->row_pos][data->col_pos - 1] = 'P';
+	create_new_map(data);
+	data->col_pos--;
+}
+
+void	move_w(t_data *data)
+{
+	if (data->map[data->row_pos - 1][data->col_pos] == '1')
+		return ;
+	if (data->map[data->row_pos - 1][data->col_pos] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos - 1][data->col_pos];
+	data->map[data->row_pos - 1][data->col_pos] = 'P';
+	create_new_map(data);
+	data->row_pos--;
+}
+
+void	move_s(t_data *data)
+{
+	if (data->map[data->row_pos + 1][data->col_pos] == '1')
+		return ;
+	if (data->map[data->row_pos + 1][data->col_pos] == 'E' &&
+		!is_c(data))
+		{
+			finish_the_game(data);		
+		}
+	data->steps++;
+	if (data->last_pos == 'C')
+			data->last_pos = '0';
+	data->map[data->row_pos][data->col_pos] = data->last_pos;
+	data->last_pos = data->map[data->row_pos + 1][data->col_pos];
+	data->map[data->row_pos + 1][data->col_pos] = 'P';
+	create_new_map(data);
+	data->row_pos++;
+}
 
 int	key_hook(int key, t_data *data)
 {
@@ -258,14 +396,12 @@ int	key_hook(int key, t_data *data)
 		exit_game(data);
 	else if (key == KEY_D)
 		move_d(data);
-	// else if (key == KEY_W)
-	// 	move_player(data, data->row_pos - 1, data->col_pos);
-	// else if (key == KEY_A)
-	// 	move_player(data, data->row_pos, data->col_pos - 1);
-	// else if (key == KEY_S)
-	// 	move_player(data, data->row_pos + 1, data->col_pos);
-	// else if (key == KEY_D)
-	// 	move_player(data, data->row_pos, data->col_pos + 1);
+	else if (key == KEY_W)
+		move_w(data);
+	else if (key == KEY_A)
+		move_a(data);
+	else if (key == KEY_S)
+		move_s(data);
 	return(0);
 }
 
