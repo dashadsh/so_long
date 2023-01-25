@@ -6,16 +6,16 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2023/01/25 16:13:40 by dgoremyk         ###   ########.fr        #
+#    Updated: 2023/01/25 16:22:35 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # run make inside mlx folder!
 
 NAME = so_long
-CC = gcc -g
+CC = gcc
 #CFLAGS = -g
-#CFLAGS = -g -Wall -Werror -Wextra
+#CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 SRC = main.c free_struct.c create_img.c early_error_check.c read_map.c messages.c check_map1.c check_map2.c error_msg.c graphics.c moves.c
 OBJ = $(SRC:.c=.o)
