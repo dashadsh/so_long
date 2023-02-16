@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 23:19:54 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 23:19:57 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:29:52 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ loads the images and defined pointer points to given image
 It will also SET (!!! => &data->img_wh) the img_wh (width/hight) accordingly, 
 which is ideal when reading sprites
 
-	// working - img_wh from data should be removed
+// working - img_wh from data should be removed
 
 */
 void	set_img_ptr(t_data *data)
@@ -99,16 +99,20 @@ mlx_new_window - init a window which'll stay open (ctrl + c to close)
 int mlx_key_hook ( void *win_ptr, int (*funct_ptr)(), void *param )
 
 int	mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
-mlx_hook = alters behaviour; 2 = KeyPress, x_mask argument of mlx_hook is useless on macos, keep it at 0
+mlx_hook = alters behaviour; 2 = KeyPress, x_mask argument of mlx_hook is 
+useless on macos, keep it at 0
 17 = DestroyNotify 1L<<2 = ButtonPressMask.
 
 mlx_loop():
  Both X-Window and MacOSX graphical systems are bi-directionnal. 
- On one hand, the program sends orders to the screen to display pixels, images, and so on. 
- On the other hand, it can get information from the keyboard and mouse associated to the screen. 
+ On one hand, the program sends orders to the screen to display pixels, images,
+ and so on. 
+ On the other hand, it can get information from the keyboard and mouse associated 
+ to the screen. 
  To do so, the program receives "events" from the keyboard or the mouse. 
  To receive events, you must use this function. This function never returns. 
- It is an infinite loop that waits for an event, and then calls a user-defined function associated with this event. 
+ It is an infinite loop that waits for an event, and then calls a user-defined function 
+ associated with this event. 
  A single parameter is needed, the connection identifier mlx_ptr.
 
 */

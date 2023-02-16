@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:06:28 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/26 11:57:56 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:32:14 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	open_file(t_data *data, char **av)
 	return (fd);
 }
 
+/* why there should be free in a loop 
+can freeing in a loop be really enough??*/
 void	count_col_rows(t_data *data, char **av)
 {
 	int		fd;
@@ -51,48 +53,19 @@ void	count_col_rows(t_data *data, char **av)
 		data->columns = int_strlen(line) - 1;
 	else
 	{
-		free_struct(data);//free(data)
+		free_struct(data);
 		error_msg_exit("File is empty\n");
 	}
 	while (line)
 	{
-		free(line); //why it should be freed here if i can free on the end??
+		free(line);
 		line = get_next_line(fd);
 		data->rows++;
 	}
-	free(line); // - can freeing in a loop be really enough??
+	free(line);
 	close(fd);
 	tiny_map_error_check(data);
 }
-
-// void	count_rows(t_data *data, char **av)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open_file(data, av);
-// 	line = get_next_line(fd);
-// 	if (line)
-// 		data->columns = ft_strlen(ft_strtrim(line, "\n"));
-// 	else
-// 	{
-// 		error_msg_free_exit("File is empty\n", data); //free(data)
-// 	}
-// 	while (line)
-// 	{
-// 		if (ft_strlen(ft_strtrim(line, "\n")) != data->columns)
-// 		{
-// 			free(line);
-// 			free_struct(data); // free(data);
-// 			error_msg_exit("Map should be rectangular\n"); // SUBSTR LEAK
-// 		}
-// 		free(line); //why it should be freed here if i can free on the end??
-// 		line = get_next_line(fd);
-// 		data->rows++;
-// 	}
-// 	free(line); // - can freeing in a loop be really enough??
-// 	close(fd);
-// }
 
 void	tiny_map_error_check(t_data *data)
 {

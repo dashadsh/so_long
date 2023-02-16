@@ -6,40 +6,11 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:04:31 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 21:05:16 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:29:03 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*
-void	zero_init(t_data *data)
-{
-	// data->map = NULL;
-	// data->duplicate = NULL;
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-
-	// data->win = NULL;
-	data->rows = 0;
-	data->columns = 0;
-	data->player = 0;
-	data->collectible = 0;
-	data->exit = 0;
-
-	data->row_pos = 0;
-	data->col_pos = 0;
-
-	// data->steps = 0;
-	// data->collected = 0;
-	data->wall_img = NULL;
-	data->floor_img = NULL;
-	data->collectible_img = NULL;
-	data->exit_img = NULL;
-	data->player_img = NULL;
-	data->img_wh = 0;
-}
-*/
 
 int	main(int ac, char **av)
 {
