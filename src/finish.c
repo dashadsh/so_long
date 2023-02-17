@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.c                                         :+:      :+:    :+:   */
+/*   finish.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 21:02:47 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/26 00:06:14 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/02/17 20:01:57 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:52:14 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
+
+int	is_c(t_data *data)
+{
+	int	collectible;
+	int	row;
+	int	col;
+
+	collectible = 0;
+	row = -1;
+	while (++row < data->rows)
+	{
+		col = -1;
+		while (++col < data->columns)
+		{
+			if (data->map[row][col] == 'C')
+				collectible++;
+		}
+	}
+	return (collectible);
+}
 
 void	finish_the_game(t_data *data)
 {
@@ -30,38 +50,4 @@ int	exit_game(t_data *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free_struct(data);
 	exit(0);
-}
-
-int	key_hook(int key, t_data *data)
-{
-	if (key == KEY_ESC)
-		exit_game(data);
-	else if (key == KEY_D)
-		move_d(data);
-	else if (key == KEY_W)
-		move_w(data);
-	else if (key == KEY_A)
-		move_a(data);
-	else if (key == KEY_S)
-		move_s(data);
-	return (0);
-}
-
-/*
-initialize MiniLibX 
-	mlx_hook(data->win_ptr, X_CLOSE, 0, exit_game, data); //closes game with mouse
-*/
-void	launch_graphics(t_data *data)
-{
-	data->mlx_ptr = mlx_init();
-
-	data->win_ptr = mlx_new_window(data->mlx_ptr, SIZE * data->columns,
-			SIZE * data->rows, "mouse getting into fights");
-	data->last_pos = '0';
-	set_img_ptr(data);
-	create_map(data);
-	display_steps(data);
-	mlx_key_hook(data->win_ptr, key_hook, data);
-	mlx_hook(data->win_ptr, X_CLOSE, 0, exit_game, data);
-	mlx_loop(data->mlx_ptr);
 }

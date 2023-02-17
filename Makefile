@@ -6,7 +6,7 @@
 #    By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/05 17:44:42 by dgoremyk          #+#    #+#              #
-#    Updated: 2023/01/26 11:59:28 by dgoremyk         ###   ########.fr        #
+#    Updated: 2023/02/17 21:00:24 by dgoremyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,17 @@
 
 NAME = so_long
 CC = gcc
-#CFLAGS = -g
 CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -f
-SRC = main.c utils.c free_struct.c create_img.c early_error_check.c read_map.c read_map2.c messages.c check_map1.c check_map2.c error_msg.c graphics.c moves.c
+
+SRC_PATH = src/
+OBJ_PATH = obj/
+
+SRC = main.c free_struct.c create_map.c early_error_check.c finish.c read_map.c rectangular_check.c check_map.c check_path.c error_msg.c launch_graphics.c moves.c
+SRCS = $(addprefix $(SRC_PATH), $(SRC))
+
 OBJ = $(SRC:.c=.o)
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 # APPLEFLAGS = -framework OpenGL -framework AppKit
 
 # library stated like a custom one
@@ -27,24 +33,28 @@ MLXLIB = ./mlx/libmlx.a
 LIBFT = ./libft/libft.a
 
 # -I dir
-%.o: %.c
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	
+#%.o: %.c
+#	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(MAKE) -C libft
 	$(MAKE) -C mlx
-	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 # $(CC) $(OBJ) $(CFLAGS) $(MLXLIB) -framework OpenGL -framework AppKit -o $(NAME)
 
-#	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C mlx
 	$(MAKE) clean -C libft
-	$(RM) $(OBJ)
-
+	$(RM) $(OBJS)
+	
 fclean: clean
 	$(MAKE) clean -C mlx
 	$(MAKE) fclean -C libft

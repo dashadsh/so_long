@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map2.c                                        :+:      :+:    :+:   */
+/*   rectangular_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 22:36:45 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/26 11:57:59 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/02/17 20:19:29 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:24:22 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
+/*
+we check if map is rectangular,
+example of non-rect map is:
 
+111111111
+10001
+1
+111
+
+common mistake - square is a subversion of rectangle so square map should 
+be considered as rectangular */
 void	rectangular_check(t_data *data, char **av)
 {
 	int	fd;

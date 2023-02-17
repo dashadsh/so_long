@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map2.c                                       :+:      :+:    :+:   */
+/*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 20:57:25 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 21:48:32 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/02/17 19:19:26 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:13:30 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-/* calloc 2d array in size of map */
+/* 
+1. void	allocate_duplicate_memory(t_data *data)
+calloc 2d array in size of the original map
+we fill it with ZEROES
+
+i'm not sure if i need to calloc +1 for struct
+
+2. void	go_through_map(t_data *data, int row, int col)
+function go_through_map recursively goes through map
+comparing to original map
+we cannot step on walls (1) so we dont visit them
+
+we mark all fields we could access with 1 char
+it's called depth first search algorythm  
+
+3. void	check_access(t_data *data)
+we check if spot when we have P C E on original map
+is equal to 1 on a duplicate map
+*/
 void	allocate_duplicate_memory(t_data *data)
 {
 	int	i;
@@ -75,12 +93,4 @@ void	check_path(t_data *data)
 	allocate_duplicate_memory(data);
 	go_through_map(data, data->row_pos, data->col_pos);
 	check_access(data);
-}
-
-void	check_map(t_data *data)
-{
-	check_0_1_p_c_e(data);
-	check_walls(data);
-	check_p_c_e(data);
-	check_path(data);
 }

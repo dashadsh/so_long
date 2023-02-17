@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 21:05:28 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/01/25 21:05:32 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/01/25 16:04:31 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:15:14 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-void	display_steps(t_data *data)
+int	int_strlen(const char *s)
 {
-	char	*steps;
+	int	i;
 
-	steps = ft_itoa(data->steps);
-	ft_putstr_fd("steps: ", 1);
-	ft_putstr_fd(steps, 1);
-	ft_putstr_fd("\n", 1);
-	free(steps);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	early_error_check(ac, av);
+	data = ft_calloc(1, sizeof(t_data));
+	if (!data)
+	{
+		error_msg_exit("Couldn't malloc structure\n");
+	}
+	read_map(data, av);
+	check_map(data);
+	launch_graphics(data);
+	return (0);
 }

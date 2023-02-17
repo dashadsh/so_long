@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map1.c                                       :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 20:56:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/16 15:29:23 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/02/17 19:19:35 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:13:26 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
+/* 
+functions checks if the map contains 01PCE chars - 
+if current char is not present in array 01PCE - throws the error 
+*/
 void	check_0_1_p_c_e(t_data *data)
 {
 	int	row;
@@ -32,6 +36,9 @@ void	check_0_1_p_c_e(t_data *data)
 	}
 }
 
+/*
+walls should vontain char 1 only
+*/
 void	check_walls(t_data *data)
 {
 	int	row;
@@ -59,6 +66,13 @@ void	check_walls(t_data *data)
 	}
 }
 
+/*
+one player
+one exit
+at least one coolectible
+
+this function counts all of them for future use in function check_p_c_e
+*/
 void	count_p_c_e(t_data *data)
 {
 	int	row;
@@ -88,6 +102,11 @@ void	count_p_c_e(t_data *data)
 	}
 }
 
+/*
+one player
+one exit
+at least one coolectible on a map
+*/
 void	check_p_c_e(t_data *data)
 {
 	count_p_c_e(data);
@@ -103,22 +122,10 @@ void	check_p_c_e(t_data *data)
 	}
 }
 
-
-/*
-=============MINE============================== 
-map exists - DONE WHEN READ
-map >= 3 rows ???
-map >= 3 columns ???
-============ASSIGNMENT============================
-map has walls, collectible, free space - 
-GAME CAN START W/O FREE SPACE (COVERED WITH COLLECTIBLE)
-map contains only 01CEP - DONE
-map contains 1 exit, 1 player - DONE
-map has >=1 collectible - DONE
-map is rectangular  - DONE WHEN READ
-map is surrounded by walls - DONE
-map should contain valid path (C and E should be reachable for P)
-===============================================
-what if there are /n chars after the map???
-*/
-
+void	check_map(t_data *data)
+{
+	check_0_1_p_c_e(data);
+	check_walls(data);
+	check_p_c_e(data);
+	check_path(data);
+}

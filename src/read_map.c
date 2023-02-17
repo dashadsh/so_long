@@ -6,26 +6,17 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:06:28 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/16 15:32:14 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:26:46 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// when allocating map memory - should it be rows+1???
-// change where is checked for row lenght  - can be done when counting rows
-//======================================================================
-// MKO
-// ft_substr -> ft_strtrim
-// needed for:
-// count_rows & read_map
-// possible to write new function to cut "\n" char an prevent memory leaks??
-
-#include "so_long.h"
+#include "../so_long.h"
 
 /*
 we should open file again to use GNL, 
 because we should read again from the start
 
-free(data); is enough here
+don't forget - GNL allocates memory
 */
 int	open_file(t_data *data, char **av)
 {
@@ -40,8 +31,10 @@ int	open_file(t_data *data, char **av)
 	return (fd);
 }
 
-/* why there should be free in a loop 
-can freeing in a loop be really enough??*/
+/* 
+why there should be free in a loop 
+can freeing in a loop be really enough??
+*/
 void	count_col_rows(t_data *data, char **av)
 {
 	int		fd;
@@ -67,12 +60,21 @@ void	count_col_rows(t_data *data, char **av)
 	tiny_map_error_check(data);
 }
 
+/*
+smallest map could look like:
+11111
+1PCE1
+11111
+
+i also could have added this check for columns...
+*/
+
 void	tiny_map_error_check(t_data *data)
 {
 	if (data->rows < 3)
 	{
 		free_struct(data);
-		error_msg_exit("Min. 3 rows needed to build a map\n"); //	free(data);
+		error_msg_exit("Min. 3 rows needed to build a map\n");
 	}
 }
 
@@ -81,7 +83,7 @@ allocates memory for the 2d map:
 array or char pointers
 otherwithe it will be: sizeof(char)
 
-????????? calloc + 1?? need to allocate +1 to set end of the map ??
+not sure if i need to allocate +1
 */
 void	allocate_map_memory(t_data *data, int fd)
 {
@@ -90,10 +92,17 @@ void	allocate_map_memory(t_data *data, int fd)
 	{
 		free_struct(data);
 		close(fd);
-		error_msg_exit("Couldn't malloc data->map\n"); //free_struct(data);
+		error_msg_exit("Couldn't malloc data->map\n");
 	}
 }
 
+/*
+we need to open and close fd several time to be able to read
+from the start of the file
+
+
+i think it could be also added error check for strtrim
+*/
 void	read_map(t_data *data, char **av)
 {
 	int		fd;
@@ -108,9 +117,9 @@ void	read_map(t_data *data, char **av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		data->map[i] = ft_strtrim(line, "\n"); // add error check here?
+		data->map[i] = ft_strtrim(line, "\n");
 		free(line);
-		line = get_next_line(fd); //GNL IS ALLOCATING MEMORY
+		line = get_next_line(fd);
 		i++;
 	}
 	free(line);

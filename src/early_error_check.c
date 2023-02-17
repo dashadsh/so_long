@@ -6,12 +6,16 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 23:19:44 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/16 15:30:00 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:13:40 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "so_long.h"
+/*
+early errors check
+so no memory allocation happens if error is chatched
+at that stage
+*/
+#include "../so_long.h"
 
 void	dot_ber_check(char **av)
 {

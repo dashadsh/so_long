@@ -6,18 +6,18 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:04:32 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/16 15:33:48 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:23:35 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 /*
 free 2d array of chars
 
-?? str = NULL;
+not sure if i need (str = NULL;) on the end of the function
 */
-void	ft_clear(char **str)
+void	ft_clear_2d_chars(char **str)
 {
 	int	i;
 
@@ -32,9 +32,10 @@ void	ft_clear(char **str)
 
 /*
 free 2d array of ints
-?? 	// str = NULL;
+
+not sure if i need (str = NULL;) on the end of the function
 */
-void	ft_clear2(int **str)
+void	ft_clear_2d_ints(int **str)
 {
 	int	i;
 
@@ -47,13 +48,19 @@ void	ft_clear2(int **str)
 	free(str);
 }
 
+/*
+i added now:
+
+if (!data)
+	return ;
+*/
 void	free_struct(t_data *data)
 {
-	if (!data) //added now
-		return ; //added now
+	if (!data)
+		return ;
 	if (data->map)
-		ft_clear(data->map);
+		ft_clear_2d_chars(data->map);
 	if (data->duplicate)
-		ft_clear2(data->duplicate);
+		ft_clear_2d_ints(data->duplicate);
 	free(data);
 }

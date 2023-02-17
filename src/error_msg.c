@@ -6,12 +6,21 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:50:25 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/16 15:30:11 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:13:44 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
+/* different error messages depend on
+if we need to free memory or not
+
+1. could be solved differently by changing free_struct(data)
+adding if (!data) return
+
+2.defining errors could be done in header file
+adding one function to cover all error cases
+*/
 void	error_msg(char *msg)
 {
 	write(2, "Error\n", 6);
