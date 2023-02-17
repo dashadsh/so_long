@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:50:25 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/17 20:13:44 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:04:22 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ adding if (!data) return
 
 2.defining errors could be done in header file
 adding one function to cover all error cases
-*/
+
+unused:
 void	error_msg(char *msg)
 {
 	write(2, "Error\n", 6);
 	write(2, msg, ft_strlen(msg));
 }
+*/
 
 void	error_msg_exit(char *msg)
 {

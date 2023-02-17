@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:03:30 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/17 20:58:24 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/17 21:07:33 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	dot_ber_check(char **av);
 void	early_error_check(int ac, char **av);
 
 /* error_msg.c */
-void	error_msg(char *msg);
 void	error_msg_exit(char *msg);
 void	error_msg_free_exit(char *msg, t_data *data);
 
