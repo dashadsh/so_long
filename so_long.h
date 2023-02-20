@@ -6,7 +6,7 @@
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:03:30 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/02/17 21:07:33 by dgoremyk         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:25:57 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define PLAYER "./img/player_right.xpm"
 # define COLLECTIBLE "./img/collectible_left.xpm"
 # define EXIT "./img/exit.xpm"
-# define EXIT_OPEN "./img/exit_open.xpm"
 
 # define X_CLOSE 17
 # define KEY_W 13
