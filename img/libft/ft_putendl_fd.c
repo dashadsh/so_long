@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:06:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:55 by dgoremyk         ###   ########.fr       */
+/*   Created: 2022/05/04 17:25:10 by dgoremyk          #+#    #+#             */
+/*   Updated: 2022/05/30 19:43:09 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_strcpy
-Copies string from (char *src) to (char *dest)
-adds NULL termination and returns dest string.
+Outputs the string ’s’ to the given file descriptor
+followed by a newline.
 */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (*(src + i))
-	{
-		*(dest + i) = *(src + i);
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+void	ft_putendl_fd(char *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
 }
+
+/*
+#include <stdio.h>
+
+int main()
+{
+	ft_putendl_fd("print string and newline", 1);
+	ft_putstr_fd("print string and no newline", 1);
+	return(0);
+}
+*/

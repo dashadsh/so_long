@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:06:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:55 by dgoremyk         ###   ########.fr       */
+/*   Created: 2022/05/21 15:05:39 by dgoremyk          #+#    #+#             */
+/*   Updated: 2022/05/25 18:05:32 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_strcpy
-Copies string from (char *src) to (char *dest)
-adds NULL termination and returns dest string.
+Counts the number of nodes in a list.
 */
 
-char	*ft_strcpy(char *dest, char *src)
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int		i;
+	t_list	*temp;
 
 	i = 0;
-	while (*(src + i))
+	temp = lst;
+	while (temp)
 	{
-		*(dest + i) = *(src + i);
 		i++;
+		temp = temp->next;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (i);
 }

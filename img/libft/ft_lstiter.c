@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:06:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:55 by dgoremyk         ###   ########.fr       */
+/*   Created: 2022/05/23 19:08:26 by dgoremyk          #+#    #+#             */
+/*   Updated: 2022/05/25 18:55:34 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_strcpy
-Copies string from (char *src) to (char *dest)
-adds NULL termination and returns dest string.
+Iterates the list ’lst’ and applies the function
+’f’ on the content of each node.
 */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (*(src + i))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	t_list	*tmp;
+
+	if (!lst || !f)
+		return ;
+	tmp = lst;
+	while (tmp)
 	{
-		*(dest + i) = *(src + i);
-		i++;
+		f(tmp->content);
+		tmp = tmp->next;
 	}
-	dest[i] = '\0';
-	return (dest);
 }

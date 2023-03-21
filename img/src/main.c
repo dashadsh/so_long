@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:06:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:55 by dgoremyk         ###   ########.fr       */
+/*   Created: 2023/01/25 16:04:31 by dgoremyk          #+#    #+#             */
+/*   Updated: 2023/02/17 20:15:14 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-ft_strcpy
-Copies string from (char *src) to (char *dest)
-adds NULL termination and returns dest string.
-*/
+#include "../so_long.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	int_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
-	while (*(src + i))
-	{
-		*(dest + i) = *(src + i);
+	while (s[i])
 		i++;
+	return (i);
+}
+
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	early_error_check(ac, av);
+	data = ft_calloc(1, sizeof(t_data));
+	if (!data)
+	{
+		error_msg_exit("Couldn't malloc structure\n");
 	}
-	dest[i] = '\0';
-	return (dest);
+	read_map(data, av);
+	check_map(data);
+	launch_graphics(data);
+	return (0);
 }

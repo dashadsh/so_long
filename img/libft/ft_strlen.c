@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgoremyk <dgoremyk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 17:06:22 by dgoremyk          #+#    #+#             */
-/*   Updated: 2023/03/21 13:08:55 by dgoremyk         ###   ########.fr       */
+/*   Created: 2022/04/30 19:57:18 by dgoremyk          #+#    #+#             */
+/*   Updated: 2022/05/24 21:29:19 by dgoremyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_strcpy
-Copies string from (char *src) to (char *dest)
-adds NULL termination and returns dest string.
+find length of string
 */
 
-char	*ft_strcpy(char *dest, char *src)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (*(src + i))
-	{
-		*(dest + i) = *(src + i);
+	while (s[i])
 		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	return (i);
 }
+
+/*
+#include <stdio.h>
+#include <string.h>
+
+int	main()
+{
+	char *str = "STRING";
+	char *str2 = "";
+	printf("strlen: %ld\t ft_strlen: %ld\n", strlen(str), ft_strlen(str));
+	printf("strlen: %ld\t ft_strlen: %ld\n", strlen(str2), ft_strlen(str2));
+	return (0);
+}
+*/
